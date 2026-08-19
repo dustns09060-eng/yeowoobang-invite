@@ -3,187 +3,213 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>여우방 초대관리</title>
+<title>여우방초대</title>
 <style>
-:root{
-  --bg:#fff7f8; --card:#ffffff; --text:#2b2527; --muted:#8c7e83;
-  --pink:#ff5f7f; --pink2:#ff8aa1; --line:#f3dfe4; --green:#2fa66f;
-  --blue:#4795e8; --purple:#8d62dc; --danger:#e5484d;
-}
+:root{--bg:#fff7f8;--card:#fff;--text:#2d2628;--muted:#8b7d82;--pink:#ff5f7f;--line:#f1dfe4;--green:#258a5d;--red:#d84d55}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif}
-.wrap{max-width:1100px;margin:auto;padding:18px}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.brand{font-weight:900;font-size:22px}.tag{font-size:12px;color:#fff;background:var(--pink);padding:6px 10px;border-radius:999px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 28px rgba(70,35,45,.05)}
-.span4{grid-column:span 4}.span5{grid-column:span 5}.span7{grid-column:span 7}.span8{grid-column:span 8}.span12{grid-column:span 12}
-h2,h3{margin:0 0 12px} h2{font-size:20px} h3{font-size:16px}
-.muted{color:var(--muted);font-size:13px}
-.hero{background:linear-gradient(135deg,#fff,#ffe9ee)}
-.big{font-size:42px;font-weight:900;margin:8px 0}.big small{font-size:16px;font-weight:700;color:var(--muted)}
-.progress{height:10px;background:#f5e8ec;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2))}
-.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
-.tier{padding:12px;border:1px solid var(--line);border-radius:14px;text-align:center}.tier b{display:block;font-size:15px}.tier.done{background:#fff1f4}
-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-label{font-size:12px;color:var(--muted);display:block;margin-bottom:5px}
-input,select,button{width:100%;border-radius:12px;border:1px solid var(--line);padding:12px;font:inherit}
-input:focus,select:focus{outline:2px solid #ffd1dc}
-button{background:var(--pink);color:white;border:0;font-weight:800;cursor:pointer}
-button.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
-button.danger{background:#fff;color:var(--danger);border:1px solid #ffd2d5}
-.full{grid-column:1/-1}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.toolbar input,.toolbar select{width:auto;flex:1;min-width:130px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #f5e9ec}
-th{color:var(--muted);font-weight:700}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800}
-.approved{background:#eaf8f0;color:var(--green)}.pending{background:#fff5dc;color:#9b6c00}.rejected{background:#fdebec;color:var(--danger)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{padding:12px;border-radius:14px;background:#fff8fa;border:1px solid var(--line)}.stat strong{font-size:22px;display:block}
-.notice{margin-top:10px;padding:10px 12px;border-radius:12px;background:#fff3f6;font-size:12px}
-.rowbtns{display:flex;gap:6px}.rowbtns button{width:auto;padding:7px 9px;font-size:11px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2b2527;color:#fff;padding:10px 15px;border-radius:999px;display:none;z-index:20}
-@media(max-width:800px){
-  .span4,.span5,.span7,.span8,.span12{grid-column:1/-1}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  form{grid-template-columns:1fr}
-  .tiers{grid-template-columns:1fr}
-  .tablewrap{overflow:auto}
-}
+.wrap{max-width:920px;margin:auto;padding:16px}
+header{margin-bottom:14px}.brand{font-size:23px;font-weight:900}.muted{font-size:12px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:15px;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+input,button{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);font:inherit}
+button{border:0;background:var(--pink);color:#fff;font-weight:800;cursor:pointer}
+.secondary{background:#fff;color:var(--text);border:1px solid var(--line)}
+.danger{background:#fff;color:var(--red);border:1px solid #ffd5d8}
+.tabs{display:flex;gap:8px;margin:12px 0}.tabs button{width:auto;padding:9px 14px}.hide{display:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}.stat strong{display:block;font-size:23px}
+.progress{height:10px;background:#f6e8ec;border-radius:99px;overflow:hidden;margin-top:10px}.progress i{display:block;height:100%;background:var(--pink);width:0}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.tier{border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}.tier.done{background:#fff0f4}
+.notice{font-size:12px;background:#fff1f5;padding:10px;border-radius:12px;margin-top:10px}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 6px;border-bottom:1px solid #f3e7ea;text-align:left;white-space:nowrap}
+.badge{font-size:11px;padding:4px 7px;border-radius:999px}.pending{background:#fff4d7}.approved{background:#e8f7ef;color:var(--green)}.rejected{background:#fdebed;color:var(--red)}
+.rowbtns{display:flex;gap:5px}.rowbtns button{width:auto;padding:7px 9px;font-size:11px}
+.toast{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2d2628;color:#fff;padding:10px 14px;border-radius:999px;z-index:99}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <div><div class="brand">🦊 여우방 초대관리</div><div class="muted">초대 · 승인 · 중복체크 · 혜택 달성 관리</div></div>
-  <div class="tag">V1 Prototype</div>
-</header>
+<header><div class="brand">🦊 여우방초대</div><div class="muted">닉네임 기준 초대 등록 · 승인 · 누적 집계</div></header>
 
-<div class="grid">
-  <section class="card hero span4">
+<div class="tabs">
+  <button id="userTab">회원 화면</button>
+  <button id="adminTab" class="secondary">관리자</button>
+</div>
+
+<section id="userView">
+  <div class="card">
+    <h3>내 닉네임</h3>
+    <div class="grid">
+      <input id="myName" placeholder="초대별관리 시트의 닉네임">
+      <button id="saveName" class="secondary">닉네임 저장</button>
+    </div>
+  </div>
+
+  <div class="card">
     <h3>내 초대 현황</h3>
-    <div class="muted" id="owner">@tlso_94 · 유별</div>
-    <div class="big"><span id="approvedCount">0</span><small> 명 승인</small></div>
-    <div class="progress"><i id="progressBar" style="width:0%"></i></div>
+    <div class="stats">
+      <div class="stat"><span class="muted">이번 초대</span><strong id="inviteCount">0</strong></div>
+      <div class="stat"><span class="muted">이전</span><strong id="previousCount">0</strong></div>
+      <div class="stat"><span class="muted">누적</span><strong id="totalCount">0</strong></div>
+    </div>
+    <div class="progress"><i id="bar"></i></div>
     <div class="muted" id="nextText" style="margin-top:7px">다음 혜택까지 10명</div>
     <div class="tiers">
-      <div class="tier" id="tier10">🌱<b>10명</b><span class="muted">프리패스 1회</span></div>
-      <div class="tier" id="tier20">💎<b>20명</b><span class="muted">추가 혜택</span></div>
-      <div class="tier" id="tier40">🔮<b>40명</b><span class="muted">최종 혜택</span></div>
+      <div id="t10" class="tier">🌱<b>10명</b><div class="muted">1단계 혜택</div></div>
+      <div id="t20" class="tier">💎<b>20명</b><div class="muted">2단계 혜택</div></div>
+      <div id="t40" class="tier">🔮<b>40명</b><div class="muted">3단계 혜택</div></div>
     </div>
-  </section>
+  </div>
 
-  <section class="card span8">
+  <div class="card">
     <h3>초대 등록</h3>
-    <form id="inviteForm">
-      <div><label>초대자 닉네임</label><input id="inviterName" value="유별" required></div>
-      <div><label>초대자 인스타 ID</label><input id="inviterId" value="@tlso_94" required></div>
-      <div><label>초대받은 분 닉네임</label><input id="inviteeName" placeholder="예: 베베홈" required></div>
-      <div><label>초대받은 분 인스타 ID</label><input id="inviteeId" placeholder="@instagram_id" required></div>
-      <div class="full"><button type="submit">+ 초대 등록</button></div>
-    </form>
-    <div class="notice">같은 인스타 ID가 이미 등록되어 있으면 중복으로 막습니다. 신규 등록은 기본적으로 <b>승인 대기</b> 상태가 됩니다.</div>
-  </section>
-
-  <section class="card span12">
-    <h3>관리자 대시보드</h3>
-    <div class="stats">
-      <div class="stat"><span class="muted">전체 등록</span><strong id="sTotal">0</strong></div>
-      <div class="stat"><span class="muted">승인</span><strong id="sApproved">0</strong></div>
-      <div class="stat"><span class="muted">승인 대기</span><strong id="sPending">0</strong></div>
-      <div class="stat"><span class="muted">거절</span><strong id="sRejected">0</strong></div>
+    <div class="grid">
+      <input id="inviteeName" placeholder="초대받은 분 닉네임">
+      <button id="addInvite">+ 초대 등록</button>
     </div>
-  </section>
+    <div class="notice">관리자 승인 전에는 집계되지 않고, 승인되는 순간 <b>초대별관리 C열 +1 / E열 누적 자동 갱신</b>됩니다.</div>
+  </div>
 
-  <section class="card span12">
-    <div class="toolbar">
-      <input id="search" placeholder="닉네임 / 인스타 ID 검색">
-      <select id="filter">
-        <option value="all">전체 상태</option>
-        <option value="pending">승인 대기</option>
-        <option value="approved">승인</option>
-        <option value="rejected">거절</option>
-      </select>
-      <button class="secondary" id="exportBtn" type="button">CSV 내보내기</button>
-      <button class="danger" id="resetBtn" type="button">전체 초기화</button>
-    </div>
+  <div class="card">
+    <h3>내 초대 명단</h3>
     <div class="tablewrap">
-      <table>
-        <thead><tr><th>#</th><th>초대자</th><th>초대받은 분</th><th>등록일</th><th>상태</th><th>관리</th></tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
+      <table><thead><tr><th>초대받은 분</th><th>등록일</th><th>상태</th></tr></thead><tbody id="myTbody"></tbody></table>
     </div>
-  </section>
+  </div>
+</section>
+
+<section id="adminView" class="hide">
+  <div class="card">
+    <h3>관리자 로그인</h3>
+    <div class="grid">
+      <input id="adminPin" type="password" placeholder="관리자 비밀번호">
+      <button id="loadAdmin">전체 명단 불러오기</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>초대 승인 관리</h3>
+    <input id="search" placeholder="초대자 / 초대받은 분 검색" style="margin-bottom:10px">
+    <div class="tablewrap">
+      <table><thead><tr><th>초대자</th><th>초대받은 분</th><th>등록일</th><th>상태</th><th>관리</th></tr></thead><tbody id="adminTbody"></tbody></table>
+    </div>
+  </div>
+</section>
 </div>
-</div>
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
 
 <script>
-const KEY='yeowoobang_invites_v1';
-let data=JSON.parse(localStorage.getItem(KEY)||'[]');
-
+const APPS_SCRIPT_URL='PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 const $=id=>document.getElementById(id);
-function normId(v){v=(v||'').trim().toLowerCase(); if(!v.startsWith('@'))v='@'+v; return v;}
-function save(){localStorage.setItem(KEY,JSON.stringify(data)); render();}
-function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',1700)}
-function statusBadge(s){
- const names={pending:'승인 대기',approved:'승인',rejected:'거절'};
- return `<span class="badge ${s}">${names[s]}</span>`;
+let adminItems=[];
+
+function toast(m){$('toast').textContent=m;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',1800)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function badge(s){const ko={pending:'승인 대기',approved:'승인',rejected:'거절'};return `<span class="badge ${s}">${ko[s]||s}</span>`}
+function ensure(){if(!APPS_SCRIPT_URL.startsWith('https://script.google.com/')){toast('Apps Script 웹앱 주소를 먼저 넣어주세요.');return false}return true}
+async function getApi(p){const u=new URL(APPS_SCRIPT_URL);Object.entries(p).forEach(([k,v])=>u.searchParams.set(k,v));const r=await fetch(u,{redirect:'follow'});return r.json()}
+async function postApi(b){const r=await fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(b),redirect:'follow'});return r.json()}
+
+function saveName(){
+  const n=$('myName').value.trim();
+  if(!n)return toast('닉네임을 입력해주세요.');
+  localStorage.setItem('yw_nickname',n);
+  toast('닉네임을 저장했어요.');
+  refreshMy();
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function render(){
- const q=$('search').value.trim().toLowerCase(), f=$('filter').value;
- let rows=data.filter(x=>(f==='all'||x.status===f)&&(!q||[x.inviterName,x.inviterId,x.inviteeName,x.inviteeId].join(' ').toLowerCase().includes(q)));
- $('tbody').innerHTML=rows.length?rows.map((x,i)=>`<tr>
-   <td>${i+1}</td>
-   <td><b>${esc(x.inviterName)}</b><br><span class="muted">${esc(x.inviterId)}</span></td>
-   <td><b>${esc(x.inviteeName)}</b><br><span class="muted">${esc(x.inviteeId)}</span></td>
-   <td>${esc(x.date)}</td>
-   <td>${statusBadge(x.status)}</td>
-   <td><div class="rowbtns">
-     <button onclick="setStatus('${x.id}','approved')">승인</button>
-     <button class="secondary" onclick="setStatus('${x.id}','rejected')">거절</button>
-     <button class="danger" onclick="removeRow('${x.id}')">삭제</button>
-   </div></td></tr>`).join(''):`<tr><td colspan="6" class="muted">등록된 초대가 없습니다.</td></tr>`;
- const approved=data.filter(x=>x.status==='approved').length;
- $('approvedCount').textContent=approved;
- $('sTotal').textContent=data.length;
- $('sApproved').textContent=approved;
- $('sPending').textContent=data.filter(x=>x.status==='pending').length;
- $('sRejected').textContent=data.filter(x=>x.status==='rejected').length;
- const max=40; $('progressBar').style.width=Math.min(100,approved/max*100)+'%';
- [10,20,40].forEach(n=>$('tier'+n).classList.toggle('done',approved>=n));
- let next=approved<10?10:approved<20?20:approved<40?40:null;
- $('nextText').textContent=next?`다음 혜택까지 ${next-approved}명`:'🎉 40명 혜택까지 모두 달성!';
+
+async function refreshMy(){
+  if(!ensure())return;
+  const name=$('myName').value.trim()||localStorage.getItem('yw_nickname')||'';
+  if(!name)return;
+  try{
+    const res=await getApi({action:'mySummary',name});
+    if(!res.ok)throw new Error(res.error);
+    renderSummary(res.summary||{},res.items||[]);
+  }catch(e){toast(e.message||'불러오지 못했어요.')}
 }
-function setStatus(id,s){const x=data.find(v=>v.id===id); if(x){x.status=s;save();toast(s==='approved'?'승인했어요':'상태를 변경했어요')}}
-function removeRow(id){if(confirm('이 초대 기록을 삭제할까요?')){data=data.filter(v=>v.id!==id);save();}}
-$('inviteForm').addEventListener('submit',e=>{
- e.preventDefault();
- const inviteeId=normId($('inviteeId').value);
- if(data.some(x=>x.inviteeId===inviteeId && x.status!=='rejected')) return toast('이미 등록된 인스타 ID예요.');
- data.unshift({
-   id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),
-   inviterName:$('inviterName').value.trim(),
-   inviterId:normId($('inviterId').value),
-   inviteeName:$('inviteeName').value.trim(),
-   inviteeId,
-   date:new Date().toLocaleString('ko-KR'),
-   status:'pending'
- });
- $('inviteeName').value=''; $('inviteeId').value=''; save(); toast('초대가 등록됐어요.');
-});
-$('search').addEventListener('input',render); $('filter').addEventListener('change',render);
-$('resetBtn').addEventListener('click',()=>{if(confirm('모든 데이터를 초기화할까요?')){data=[];save();}});
-$('exportBtn').addEventListener('click',()=>{
- const head=['초대자 닉네임','초대자 ID','초대받은 분 닉네임','초대받은 분 ID','등록일','상태'];
- const lines=[head,...data.map(x=>[x.inviterName,x.inviterId,x.inviteeName,x.inviteeId,x.date,x.status])];
- const csv='\ufeff'+lines.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
- const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a');
- a.href=URL.createObjectURL(blob); a.download='여우방_초대명단.csv'; a.click(); URL.revokeObjectURL(a.href);
-});
-render();
+
+function renderSummary(s,items){
+  const invite=Number(s.invite||0), previous=Number(s.previous||0), total=Number(s.total||0);
+  $('inviteCount').textContent=invite;$('previousCount').textContent=previous;$('totalCount').textContent=total;
+  $('bar').style.width=Math.min(100,total/40*100)+'%';
+  [10,20,40].forEach(n=>$('t'+n).classList.toggle('done',total>=n));
+  const next=total<10?10:total<20?20:total<40?40:null;
+  $('nextText').textContent=next?`다음 혜택까지 ${next-total}명`:'🎉 40명 혜택 달성!';
+  $('myTbody').innerHTML=items.length?items.map(x=>`<tr><td>${esc(x.invitee_name)}</td><td>${esc(x.created_at)}</td><td>${badge(x.status)}</td></tr>`).join(''):'<tr><td colspan="3" class="muted">등록된 초대가 없습니다.</td></tr>';
+}
+
+async function addInvite(){
+  if(!ensure())return;
+  const inviter_name=$('myName').value.trim(), invitee_name=$('inviteeName').value.trim();
+  if(!inviter_name)return toast('먼저 내 닉네임을 입력해주세요.');
+  if(!invitee_name)return toast('초대받은 분 닉네임을 입력해주세요.');
+  try{
+    const res=await postApi({action:'addInvite',inviter_name,invitee_name});
+    if(!res.ok)throw new Error(res.error);
+    $('inviteeName').value='';
+    toast('초대가 등록됐어요.');
+    refreshMy();
+  }catch(e){toast(e.message||'등록에 실패했어요.')}
+}
+
+async function loadAdmin(){
+  if(!ensure())return;
+  const pin=$('adminPin').value;
+  if(!pin)return toast('관리자 비밀번호를 입력해주세요.');
+  try{
+    const res=await getApi({action:'adminList',pin});
+    if(!res.ok)throw new Error(res.error);
+    adminItems=res.items||[];
+    renderAdmin();
+  }catch(e){toast(e.message||'불러오지 못했어요.')}
+}
+
+function renderAdmin(){
+  const q=$('search').value.trim().toLowerCase();
+  const rows=adminItems.filter(x=>!q||[x.inviter_name,x.invitee_name].join(' ').toLowerCase().includes(q));
+  $('adminTbody').innerHTML=rows.length?rows.map(x=>`<tr>
+    <td><b>${esc(x.inviter_name)}</b></td>
+    <td>${esc(x.invitee_name)}</td>
+    <td>${esc(x.created_at)}</td>
+    <td>${badge(x.status)}</td>
+    <td><div class="rowbtns">
+      <button onclick="setStatus('${x.id}','approved')">승인</button>
+      <button class="secondary" onclick="setStatus('${x.id}','rejected')">거절</button>
+      <button class="danger" onclick="deleteRow('${x.id}')">삭제</button>
+    </div></td>
+  </tr>`).join(''):'<tr><td colspan="5" class="muted">기록이 없습니다.</td></tr>';
+}
+
+async function setStatus(id,status){
+  try{
+    const res=await postApi({action:'adminUpdateStatus',id,status,pin:$('adminPin').value});
+    if(!res.ok)throw new Error(res.error);
+    toast('상태를 변경했어요.');
+    await loadAdmin(); await refreshMy();
+  }catch(e){toast(e.message)}
+}
+
+async function deleteRow(id){
+  if(!confirm('이 기록을 삭제할까요?'))return;
+  try{
+    const res=await postApi({action:'adminDelete',id,pin:$('adminPin').value});
+    if(!res.ok)throw new Error(res.error);
+    toast('삭제했어요.');
+    await loadAdmin(); await refreshMy();
+  }catch(e){toast(e.message)}
+}
+
+$('userTab').onclick=()=>{$('userView').classList.remove('hide');$('adminView').classList.add('hide')}
+$('adminTab').onclick=()=>{$('adminView').classList.remove('hide');$('userView').classList.add('hide')}
+$('saveName').onclick=saveName;
+$('addInvite').onclick=addInvite;
+$('loadAdmin').onclick=loadAdmin;
+$('search').oninput=renderAdmin;
+
+$('myName').value=localStorage.getItem('yw_nickname')||'';
+if($('myName').value)refreshMy();
 </script>
 </body>
 </html>
