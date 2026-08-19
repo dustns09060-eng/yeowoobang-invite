@@ -331,6 +331,89 @@ th{color:#666;font-weight:800}
   table{font-size:12px}
 }
 
+
+.summaryWrap{
+  width:100%;
+  overflow:visible;
+}
+.summaryTable{
+  width:100%;
+  min-width:0 !important;
+  table-layout:fixed;
+  border-collapse:collapse;
+}
+.summaryTable th,
+.summaryTable td{
+  white-space:normal;
+  padding:11px 6px;
+  vertical-align:middle;
+}
+.summaryTable th:first-child,
+.summaryTable td:first-child{
+  width:46%;
+  text-align:left;
+}
+.summaryTable th:not(:first-child),
+.summaryTable td:not(:first-child){
+  width:18%;
+  text-align:center;
+}
+.summaryMember{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-width:0;
+}
+.summaryNo{
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  background:#f3f3f3;
+  color:#555;
+  font-size:11px;
+  font-weight:800;
+}
+.summaryName{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-weight:800;
+}
+.summaryTotal{
+  font-weight:900;
+}
+@media(max-width:700px){
+  .summaryTable{
+    font-size:12px;
+  }
+  .summaryTable th,
+  .summaryTable td{
+    padding:10px 4px;
+  }
+  .summaryTable th:first-child,
+  .summaryTable td:first-child{
+    width:49%;
+  }
+  .summaryTable th:not(:first-child),
+  .summaryTable td:not(:first-child){
+    width:17%;
+  }
+  .summaryNo{
+    width:24px;
+    height:24px;
+    font-size:10px;
+    border-radius:7px;
+  }
+  .summaryMember{
+    gap:5px;
+  }
+}
+
 </style>
 <meta name="theme-color" content="#ffffff">
 </head>
@@ -445,9 +528,16 @@ th{color:#666;font-weight:800}
 
   <div class="card">
     <h3>회원별 누적 현황</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>닉네임</th><th>초대</th><th>이전</th><th>누적</th></tr></thead>
+    <div class="summaryWrap">
+      <table class="summaryTable">
+        <thead>
+          <tr>
+            <th>번호 · 닉네임</th>
+            <th>초대</th>
+            <th>이전</th>
+            <th>누적</th>
+          </tr>
+        </thead>
         <tbody id="summaryTbody"></tbody>
       </table>
     </div>
@@ -628,8 +718,17 @@ function renderAdmin(){
 }
 
 function renderSummary(){
-  $('summaryTbody').innerHTML=summaryItems.length?summaryItems.map(x=>`<tr>
-    <td><b>${esc(x.nickname)}</b></td><td>${x.invite}</td><td>${x.previous}</td><td><b>${x.total}</b></td>
+  const rows=[...summaryItems].sort((a,b)=>Number(a.number||999999)-Number(b.number||999999));
+  $('summaryTbody').innerHTML=rows.length?rows.map(x=>`<tr>
+    <td>
+      <div class="summaryMember">
+        <span class="summaryNo">${esc(x.number||'-')}</span>
+        <span class="summaryName">${esc(x.nickname)}</span>
+      </div>
+    </td>
+    <td>${Number(x.invite||0)}</td>
+    <td>${Number(x.previous||0)}</td>
+    <td class="summaryTotal">${Number(x.total||0)}</td>
   </tr>`).join(''):'<tr><td colspan="4" class="muted">집계 데이터가 없습니다.</td></tr>';
 }
 
