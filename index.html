@@ -3,60 +3,336 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>여우방초대</title>
+<title>여우방초대 V7</title>
 <style>
-:root{--bg:#ffffff;--card:#ffffff;--text:#111111;--muted:#777;--line:#e9e9e9;--soft:#f7f7f7;--accent:#111111;--orange:#ff8a2a;--green:#168a50;--red:#d83c46}
+
+:root{
+  --bg:#f7f7f7;
+  --card:#ffffff;
+  --text:#111111;
+  --muted:#777777;
+  --line:#e8e8e8;
+  --soft:#f6f6f6;
+  --accent:#111111;
+  --green:#168a50;
+  --red:#d83c46;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif}
-.wrap{max-width:920px;margin:auto;padding:18px}
-header{display:flex;align-items:center;gap:12px;padding:4px 0 16px}
-.logo{width:58px;height:58px;border-radius:50%;object-fit:cover;border:1px solid #eee}
-.brand{font-size:25px;font-weight:900;letter-spacing:-1px}
-.sub{font-size:13px;color:var(--muted);margin-top:3px}
-.tabs{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px}
-.tabs button{flex:1;border:0;border-radius:0;background:#fff;color:#555;padding:13px;font-weight:800}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR","Segoe UI",sans-serif;
+  line-height:1.45;
+}
+.wrap{
+  width:min(100%,720px);
+  margin:0 auto;
+  min-height:100vh;
+  background:#fff;
+  padding:22px 22px 28px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.02);
+}
+header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:2px 0 18px;
+}
+.logo{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid #eee;
+  flex:none;
+}
+.brand{
+  font-size:30px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-1.2px;
+}
+.sub{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:5px;
+}
+.tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:18px;
+  background:#fff;
+}
+.tabs button{
+  border:0;
+  border-radius:0;
+  background:#fff;
+  color:#555;
+  padding:15px 12px;
+  font-size:16px;
+  font-weight:800;
+}
 .tabs button.active{background:#111;color:#fff}
-.card{border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;background:#fff}
-h2,h3{margin:0 0 14px;letter-spacing:-.5px}
-h3{font-size:19px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-label{display:block;font-size:12px;font-weight:700;margin:0 0 6px}
-input,button{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);font:inherit}
-input{background:#fff}
-button{background:#111;color:#fff;border:0;font-weight:800;cursor:pointer}
-button.secondary{background:#fff;color:#111;border:1px solid var(--line)}
-button.danger{background:#fff;color:var(--red);border:1px solid #f1cdd1}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+  margin-bottom:16px;
+  background:var(--card);
+}
+h2,h3{margin:0 0 16px;letter-spacing:-.6px}
+h3{font-size:21px}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 .full{grid-column:1/-1}
-.notice{margin-top:10px;padding:11px 12px;background:var(--soft);border-radius:12px;color:#555;font-size:12px;line-height:1.55}
-.statusbox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.stat{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
-.stat span{display:block;color:#777;font-size:12px}
-.stat strong{display:block;font-size:22px;margin-top:5px}
-.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  margin:0 0 7px;
+}
+input,button{
+  width:100%;
+  min-height:50px;
+  padding:13px 14px;
+  border-radius:13px;
+  border:1px solid var(--line);
+  font:inherit;
+}
+input{
+  background:#fff;
+  color:#111;
+  font-size:15px;
+}
+input::placeholder{color:#9a9a9a}
+input:focus{
+  outline:none;
+  border-color:#bbb;
+  box-shadow:0 0 0 3px rgba(0,0,0,.03);
+}
+button{
+  background:#111;
+  color:#fff;
+  border:0;
+  font-weight:800;
+  cursor:pointer;
+}
+button.secondary{
+  background:#fff;
+  color:#111;
+  border:1px solid var(--line);
+}
+button.danger{
+  background:#fff;
+  color:var(--red);
+  border:1px solid #f1cdd1;
+}
+.notice{
+  margin-top:12px;
+  padding:12px 14px;
+  background:var(--soft);
+  border-radius:13px;
+  color:#555;
+  font-size:13px;
+  line-height:1.6;
+}
+.statusbox{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.stat{
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px 10px;
+  text-align:center;
+}
+.stat span{
+  display:block;
+  color:#777;
+  font-size:12px;
+}
+.stat strong{
+  display:block;
+  font-size:24px;
+  margin-top:5px;
+}
+.badge{
+  display:inline-block;
+  border-radius:999px;
+  padding:5px 9px;
+  font-size:11px;
+  font-weight:800;
+}
 .pending{background:#fff4db;color:#9b6b00}
 .approved{background:#e8f7ee;color:var(--green)}
 .rejected{background:#fdebed;color:var(--red)}
-.tablewrap{overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:10px 7px;border-bottom:1px solid #eee;text-align:left;white-space:nowrap}
-th{color:#666}
-.rowbtns{display:flex;gap:5px}
-.rowbtns button{width:auto;padding:7px 9px;font-size:11px}
-.benefit{border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:10px}
-.benefit h4{margin:0 0 8px;font-size:15px}
-.benefit p{margin:5px 0;font-size:13px;line-height:1.55}
-.rule{margin-top:12px;padding:13px;background:#fff7f4;border-radius:12px;font-size:12px;line-height:1.6}
-.contact{margin-top:10px;padding:13px;background:#f6f6f6;border-radius:12px;font-size:12px;line-height:1.6}
-.hide{display:none}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+
+.tablewrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+  min-width:560px;
+}
+th,td{
+  padding:11px 8px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  white-space:nowrap;
+}
+th{color:#666;font-weight:800}
+.rowbtns{display:flex;gap:6px}
+.rowbtns button{
+  width:auto;
+  min-height:auto;
+  padding:7px 9px;
+  font-size:11px;
+}
+.benefit{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:15px;
+  margin-top:10px;
+}
+.benefit h4{margin:0 0 8px;font-size:16px}
+.benefit p{margin:5px 0;font-size:13px;line-height:1.6}
+.rule{
+  margin-top:12px;
+  padding:13px 14px;
+  background:#fff7f4;
+  border-radius:13px;
+  font-size:13px;
+  line-height:1.65;
+}
+.contact{
+  margin-top:10px;
+  padding:13px 14px;
+  background:#f6f6f6;
+  border-radius:13px;
+  font-size:13px;
+  line-height:1.65;
+}
+.toolbar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
 .toolbar input{flex:1;min-width:180px}
-.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}
-.filters button{width:auto;background:#fff;color:#333;border:1px solid var(--line);padding:8px 11px}
+.filters{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+.filters button{
+  width:auto;
+  min-height:auto;
+  background:#fff;
+  color:#333;
+  border:1px solid var(--line);
+  padding:9px 12px;
+}
 .filters button.active{background:#111;color:#fff}
-.footer{text-align:center;color:#999;font-size:11px;padding:10px 0 24px}
-.toast{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 15px;border-radius:999px;z-index:99}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.statusbox{grid-template-columns:1fr 1fr 1fr}.brand{font-size:22px}}
+.hide{display:none!important}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+}
+.modal.hide{display:none!important}
+.modalBox{
+  width:min(420px,100%);
+  background:#fff;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
+.modalBox h3{margin:0 0 8px}
+.modalBtns{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:10px;
+}
+.footer{
+  text-align:center;
+  color:#999;
+  font-size:11px;
+  padding:10px 0 8px;
+}
+.toast{
+  display:none;
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:999px;
+  z-index:120;
+  max-width:calc(100vw - 32px);
+  text-align:center;
+}
+
+@media(min-width:1000px){
+  body{padding:28px 0}
+  .wrap{
+    border-radius:28px;
+    box-shadow:0 10px 36px rgba(0,0,0,.06);
+    padding:28px 30px 32px;
+  }
+}
+@media(max-width:700px){
+  body{background:#fff}
+  .wrap{
+    width:100%;
+    padding:16px 14px 24px;
+    box-shadow:none;
+  }
+  header{gap:11px;padding-bottom:14px}
+  .logo{width:54px;height:54px}
+  .brand{font-size:24px}
+  .sub{font-size:12px}
+  .tabs{margin-bottom:14px}
+  .tabs button{padding:13px 8px;font-size:15px}
+  .card{
+    border-radius:18px;
+    padding:17px 15px;
+    margin-bottom:13px;
+  }
+  h3{font-size:19px}
+  .grid{grid-template-columns:1fr;gap:10px}
+  .statusbox{grid-template-columns:repeat(3,1fr);gap:7px}
+  .stat{padding:12px 6px}
+  .stat strong{font-size:21px}
+  table{font-size:12px}
+}
+
 </style>
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <div class="wrap">
@@ -70,12 +346,24 @@ th{color:#666}
   <button id="adminTab">관리자</button>
 </div>
 
+<div id="adminLoginModal" class="modal hide">
+  <div class="modalBox">
+    <h3>관리자 인증</h3>
+    <p class="muted">관리자 비밀번호를 입력한 경우에만 관리자 화면을 볼 수 있어요.</p>
+    <input id="adminPinModal" type="password" placeholder="관리자 비밀번호">
+    <div class="modalBtns">
+      <button id="adminLoginBtn">확인</button>
+      <button id="adminCancelBtn" class="secondary">취소</button>
+    </div>
+  </div>
+</div>
+
 <section id="userView">
   <div class="card">
     <h3>내 정보</h3>
     <div class="grid">
-      <div><label>내 닉네임</label><input id="myName" placeholder="예: 유별"></div>
-      <div><label>내 인스타 아이디</label><input id="myInstagram" placeholder="예: @tlso_94"></div>
+      <div><label>내 닉네임</label><input id="myName" placeholder="예: 여우방"></div>
+      <div><label>내 인스타 아이디</label><input id="myInstagram" placeholder="예: @yeowoobang"></div>
       <div class="full"><button id="saveProfile">내 정보 확인</button></div>
     </div>
     <div class="notice">회원명단에 등록된 닉네임과 인스타 아이디가 서로 일치해야 등록할 수 있어요.</div>
@@ -132,10 +420,9 @@ th{color:#666}
 
 <section id="adminView" class="hide">
   <div class="card">
-    <h3>관리자 로그인</h3>
-    <div class="grid">
-      <input id="adminPin" type="password" placeholder="관리자 비밀번호">
-      <button id="loadAdmin">관리 화면 불러오기</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <h3 style="margin:0">관리자 화면</h3>
+      <button id="adminLogout" class="secondary" style="width:auto">관리자 나가기</button>
     </div>
   </div>
 
@@ -240,17 +527,39 @@ async function refreshMy(){
   }catch(e){toast(e.message||'등록 상태를 불러오지 못했어요.')}
 }
 
-async function loadAdmin(){
-  const pin=$('adminPin').value;
+let adminPinSession='';
+
+async function adminLogin(){
+  const pin=$('adminPinModal').value;
   if(!pin)return toast('관리자 비밀번호를 입력해주세요.');
   try{
     const res=await getApi({action:'adminList',pin});
     if(!res.ok)throw new Error(res.error);
+    adminPinSession=pin;
     adminItems=res.items||[];
     summaryItems=res.summary||[];
+    $('adminLoginModal').classList.add('hide');
+    $('userView').classList.add('hide');
+    $('adminView').classList.remove('hide');
+    $('adminTab').classList.add('active');
+    $('userTab').classList.remove('active');
     renderAdmin();
     renderSummary();
-  }catch(e){toast(e.message||'관리 화면을 불러오지 못했어요.')}
+    $('adminPinModal').value='';
+  }catch(e){
+    adminPinSession='';
+    toast('관리자 비밀번호가 올바르지 않습니다.');
+  }
+}
+
+async function loadAdmin(){
+  if(!adminPinSession) throw new Error('관리자 인증이 필요합니다.');
+  const res=await getApi({action:'adminList',pin:adminPinSession});
+  if(!res.ok) throw new Error(res.error);
+  adminItems=res.items||[];
+  summaryItems=res.summary||[];
+  renderAdmin();
+  renderSummary();
 }
 
 function renderAdmin(){
@@ -281,7 +590,7 @@ function renderSummary(){
 
 async function setStatus(id,status){
   try{
-    const res=await postApi({action:'adminUpdateStatus',id,status,pin:$('adminPin').value});
+    const res=await postApi({action:'adminUpdateStatus',id,status,pin:adminPinSession});
     if(!res.ok)throw new Error(res.error);
     toast('상태를 변경했어요.');
     await loadAdmin();
@@ -292,7 +601,7 @@ async function setStatus(id,status){
 async function deleteRow(id){
   if(!confirm('이 기록을 삭제할까요?'))return;
   try{
-    const res=await postApi({action:'adminDelete',id,pin:$('adminPin').value});
+    const res=await postApi({action:'adminDelete',id,pin:adminPinSession});
     if(!res.ok)throw new Error(res.error);
     toast('삭제했어요.');
     await loadAdmin();
@@ -300,11 +609,36 @@ async function deleteRow(id){
   }catch(e){toast(e.message)}
 }
 
-$('userTab').onclick=()=>{$('userView').classList.remove('hide');$('adminView').classList.add('hide');$('userTab').classList.add('active');$('adminTab').classList.remove('active')};
-$('adminTab').onclick=()=>{$('adminView').classList.remove('hide');$('userView').classList.add('hide');$('adminTab').classList.add('active');$('userTab').classList.remove('active')};
+$('userTab').onclick=()=>{
+  $('userView').classList.remove('hide');
+  $('adminView').classList.add('hide');
+  $('userTab').classList.add('active');
+  $('adminTab').classList.remove('active');
+};
+$('adminTab').onclick=()=>{
+  if(adminPinSession){
+    $('userView').classList.add('hide');
+    $('adminView').classList.remove('hide');
+    $('adminTab').classList.add('active');
+    $('userTab').classList.remove('active');
+  }else{
+    $('adminLoginModal').classList.remove('hide');
+    setTimeout(()=>$('adminPinModal').focus(),50);
+  }
+};
+$('adminLoginBtn').onclick=adminLogin;
+$('adminCancelBtn').onclick=()=>{$('adminLoginModal').classList.add('hide');$('adminPinModal').value=''};
+$('adminLogout').onclick=()=>{
+  adminPinSession='';
+  adminItems=[];summaryItems=[];
+  $('adminView').classList.add('hide');
+  $('userView').classList.remove('hide');
+  $('adminTab').classList.remove('active');
+  $('userTab').classList.add('active');
+  toast('관리자 화면에서 나왔어요.');
+};
 $('saveProfile').onclick=saveProfile;
 $('registerBtn').onclick=registerInviter;
-$('loadAdmin').onclick=loadAdmin;
 $('search').oninput=renderAdmin;
 document.querySelectorAll('.filters button').forEach(btn=>btn.onclick=()=>{
   currentFilter=btn.dataset.filter;
