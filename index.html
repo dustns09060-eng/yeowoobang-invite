@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>여우방초대 V8</title>
+<title>여우방초대 V9</title>
 <style>
 
 :root{
@@ -349,7 +349,7 @@ th{color:#666;font-weight:800}
 <div id="adminLoginModal" class="modal hide">
   <div class="modalBox">
     <h3>관리자 인증</h3>
-    <p class="muted">관리자 비밀번호는 Apps Script에서만 확인되며, 인증된 경우에만 관리자 화면이 열려요.</p>
+    <p class="muted">관리자 비밀번호는 Apps Script에서만 확인됩니다. 인증 실패 시 실제 서버 오류 메시지가 표시됩니다.</p>
     <input id="adminPinModal" type="password" placeholder="관리자 비밀번호">
     <div class="modalBtns">
       <button id="adminLoginBtn">확인</button>
@@ -530,32 +530,77 @@ async function refreshMy(){
 let adminPinSession='';
 
 async function adminLogin(){
-  const pin=$('adminPinModal').value;
-  if(!pin)return toast('관리자 비밀번호를 입력해주세요.');
+  const pin=$('adminPinModal').value.trim();
+  if(!pin) return toast('관리자 비밀번호를 입력해주세요.');
+
   try{
-    const res=await getApi({action:'adminList',pin});
-    if(!res.ok)throw new Error(res.error);
+    const url = new URL(APPS_SCRIPT_URL);
+    url.searchParams.set('action','adminList');
+    url.searchParams.set('pin',pin);
+    url.searchParams.set('_t',Date.now().toString());
+
+    const r = await fetch(url.toString(),{
+      method:'GET',
+      cache:'no-store',
+      redirect:'follow'
+    });
+
+    const text = await r.text();
+    let res;
+    try{
+      res = JSON.parse(text);
+    }catch(_){
+      throw new Error('Apps Script 응답을 읽지 못했습니다. 배포 주소 또는 웹앱 배포 상태를 확인해주세요.');
+    }
+
+    if(!res.ok){
+      throw new Error(res.error || '관리자 인증에 실패했습니다.');
+    }
+
     adminPinSession=pin;
     adminItems=res.items||[];
     summaryItems=res.summary||[];
+
     $('adminLoginModal').classList.add('hide');
     $('userView').classList.add('hide');
     $('adminView').classList.remove('hide');
     $('adminTab').classList.add('active');
     $('userTab').classList.remove('active');
+
     renderAdmin();
     renderSummary();
     $('adminPinModal').value='';
+    toast('관리자 인증 완료');
   }catch(e){
     adminPinSession='';
-    toast('관리자 비밀번호가 올바르지 않습니다.');
+    toast(e.message || '관리자 인증에 실패했습니다.');
   }
 }
 
 async function loadAdmin(){
   if(!adminPinSession) throw new Error('관리자 인증이 필요합니다.');
-  const res=await getApi({action:'adminList',pin:adminPinSession});
-  if(!res.ok) throw new Error(res.error);
+
+  const url = new URL(APPS_SCRIPT_URL);
+  url.searchParams.set('action','adminList');
+  url.searchParams.set('pin',adminPinSession);
+  url.searchParams.set('_t',Date.now().toString());
+
+  const r = await fetch(url.toString(),{
+    method:'GET',
+    cache:'no-store',
+    redirect:'follow'
+  });
+
+  const text = await r.text();
+  let res;
+  try{
+    res = JSON.parse(text);
+  }catch(_){
+    throw new Error('관리자 데이터를 읽지 못했습니다.');
+  }
+
+  if(!res.ok) throw new Error(res.error || '관리자 인증이 필요합니다.');
+
   adminItems=res.items||[];
   summaryItems=res.summary||[];
   renderAdmin();
@@ -627,6 +672,11 @@ $('adminTab').onclick=()=>{
   }
 };
 $('adminLoginBtn').onclick=adminLogin;
+
+$('adminPinModal').addEventListener('keydown',e=>{
+  if(e.key==='Enter') adminLogin();
+});
+
 $('adminCancelBtn').onclick=()=>{$('adminLoginModal').classList.add('hide');$('adminPinModal').value=''};
 $('adminLogout').onclick=()=>{
   adminPinSession='';
